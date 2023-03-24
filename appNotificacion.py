@@ -10,10 +10,10 @@ import pywhatkit
 from termcolor import colored
 
 email_subject = "Email test from Python" #Asunto del correo
-sender_email_address = "administradorti2@myolegal.com"#Emisor del correo
-receiver_email_address = "administradorti2@myolegal.com"#Receptor del correo, en este momento no se sabe quien sera el receptor
+sender_email_address = "##########@########.com"#Emisor del correo
+receiver_email_address = "#######@######.com"#Receptor del correo, en este momento no se sabe quien sera el receptor
 email_smtp = "smtp.office365.com"#servidor smtp
-email_password = "Asdf%%55"
+email_password = "########"
 
 #variables que se cargarán en el correo y mensaje
 abogado = None
@@ -31,13 +31,13 @@ numeroRel = None
 supervision = None
 
 #Números a Notificar
-numeroFase = 72391968
-numeroProduccion = 70449330
-numeroCiclos = 60386582
-numeroMant = 70449268
-mariana = 70101254
-caro = 62432525
-prueba = 62685107
+numeroFase = #######
+numeroProduccion = #######
+numeroCiclos = ########
+numeroMant = #######
+mariana = #######
+caro = #######
+prueba = #######
 supervisionNotificar = None
 SupervisionCorreo = None
 correoAbogado = None
@@ -47,10 +47,10 @@ correoAbogado = None
 try:
     connection = pyodbc.connect(
         'Driver={ODBC Driver 17 for SQL Server};'
-        'Server=122.200.47.6;'
-        "Database=BAC;"
+        'Server=#.#.#.#;'
+        "Database=###;"
         "UID=respaldo;"
-        "PWD=M&O8uf3t3*2023*;"
+        "PWD=1234;"
     )
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM [AUDIENCIAS] WHERE Cast([FECHA AUDIENCIA] AS date) >= Cast( GETDATE() AS date) ")
@@ -152,10 +152,10 @@ else :
             
             #Se realizan las consultas para extraer los datos faltantes para el correo
             cursor2 = connection.cursor()
-            cursor2.execute("SELECT [ABOGADO], [JUZGADO], [NUMERO EXPEDIENTE] FROM [EXPEDIENTE JUDICIAL] WHERE [ESTATUS EXPEDIENTE] = 'ACTIVO' or [ESTATUS EXPEDIENTE] = 'AUDIENCIA' and [NUMERO RELACIONAL] = ?",(numeroRel,))               
+            cursor2.execute("SELECT [ABOGADO], [JUZGADO], [NUMERO EXPEDIENTE] FROM [########] WHERE [ESTATUS EXPEDIENTE] = 'ACTIVO' or [ESTATUS EXPEDIENTE] = 'AUDIENCIA' and [NUMERO RELACIONAL] = ?",(numeroRel,))               
             result2 = cursor2.fetchall()
             cursor3 = connection.cursor()
-            cursor3.execute("SELECT [PRIMER NOMBRE], [PRIMER APELLIDO], [SEGUNDO APELLIDO], [IDENTIFICACION], [CUENTA] FROM [DATOS IMPORTADOS] WHERE [NUMERO RELACIONAL] = ?",(numeroRel,))
+            cursor3.execute("SELECT [PRIMER NOMBRE], [PRIMER APELLIDO], [SEGUNDO APELLIDO], [IDENTIFICACION], [CUENTA] FROM [#######] WHERE [NUMERO RELACIONAL] = ?",(numeroRel,))
             result3 = cursor3.fetchall()
             
             
@@ -181,8 +181,8 @@ else :
                 cuenta = cuenta.strip()
 
             print(abogado)
-            correoAbogado = "vmendez@myolegal.com" if abogado == "VM" else "eortega@myolegal.com"
-            nombreAbogado = "Abogado Erick Ortega" if abogado == "EO" else "Abogada Virginia Méndez" if abogado == "VM" else "abogado(a)"
+            correoAbogado = "#####@#####.com" if abogado == "VM" else "#####@#####.com"
+                nombreAbogado = "Abogado Goku" if abogado == "EO" else "Abogada Bulma" if abogado == "VM" else "abogado(a)"
             print(nombreAbogado)            
             
             if juzgado == 'GOICO 3':
@@ -237,23 +237,23 @@ else :
 
             #configurando los correos para el envío
             print(colored('Datos Obtenidos:', 'blue', 'on_white'))
-            to_addresses = ["administradorti2@myolegal.com"]
-            to_addresses = ["supervisionprocesal@myolegal.com", "asistentelegal@myolegal.com"]
+            to_addresses = ["########@######.com"]
+            to_addresses = ["########@######.com", "########@######.com"]
             to_addresses = []
             if supervision == "CICLOS":
-                SupervisionCorreo = "supervisioncobro2@myolegal.com"
+                SupervisionCorreo = "########@######.com"
                 print(SupervisionCorreo)
                 to_addresses.append(SupervisionCorreo)
             elif supervision == "PRODUCCION":
-                SupervisionCorreo = "supervisioncobro1@myolegal.com"
+                SupervisionCorreo = "########@######.com"
                 print(SupervisionCorreo)
                 to_addresses.append(SupervisionCorreo)
             elif supervision == "FASE":
-                SupervisionCorreo = "supervisioncobro@myolegal.com"
+                SupervisionCorreo = "########@######.com"
                 print(SupervisionCorreo)
                 to_addresses.append(SupervisionCorreo)
             elif supervision == "MANTENIMIENTO":
-                SupervisionCorreo = "Supervisioncobro3@myolegal.com"
+                SupervisionCorreo = "########@######.com"
                 print(SupervisionCorreo)
                 to_addresses.append(SupervisionCorreo)
             to_addresses.append(correoAbogado)
