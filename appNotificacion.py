@@ -49,8 +49,8 @@ try:
         'Driver={ODBC Driver 17 for SQL Server};'
         'Server=#.#.#.#;'
         "Database=###;"
-        "UID=respaldo;"
-        "PWD=1234;"
+        "UID=#####;"
+        "PWD=#####;"
     )
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM [AUDIENCIAS] WHERE Cast([FECHA AUDIENCIA] AS date) >= Cast( GETDATE() AS date) ")
